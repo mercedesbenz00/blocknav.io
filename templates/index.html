@@ -1,12 +1,33 @@
-{% extends "_layout.html %}
+{% extends "_layout.html" %}
 
 
 
-{% block "content" %}
-<div class="page-header">
-    <ul>
-        <li>List of Recent Blocks</li>
-        <li>Block Data</li>
-    </ul>
-</div>
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+            <th>Height</th>
+            <th>Block Hash</th>
+            <th>Block Time</th>
+            <th>Chain</th>
+        </thead>
+        <tbody>
+            {% for block in blocks %}
+            <tr>
+                <td><a href="{{ url_for('get_block_height', height=block.height) }}">{{ block.height }}</a></td>
+                <td><a href="{{ url_for('block', block=block.hash) }}">{{ block.hash }}</a></td>
+                <td>{{ block.time|datetime }} <a href="#" data-toggle="tooltip" data-placement="right" data-original-title="Unix Time: {{ block.time }}"> <i class="fa fa-clock-o"></i></a></td>
+                <td><small>{% if block.main_chain == True %}<span class="label label-danger"> MAIN </span>{% else %}<span class="label label-warning"> Forked </span> {% endif %}</small></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="padding-top:15px;">
+                    <small class="pull-right">
+                        <i class="fa fa-info-circle"></i> Showing the last 5 blocks...
+                    </small>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 {% endblock %}

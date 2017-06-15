@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- bootstrap theme -->
+		<link rel="stylesheet" href="https://s3.amazonaws.com/blocknav/bootstrap-simplex.min.css">
+		
+		<!-- Optional theme 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+			  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
+			  crossorigin="anonymous">--> 
+		<style>
+			.table {
+				border-radius: 5px;
+				width: 50%;
+				margin: 0px auto;
+				float: none;
+			}
+			.table th {
+				text-align: center;
+			}
+			.table td {
+				text-align: center;
+			}
+			.navbar-brand {
+			    transform: translateX(-50%);
+			    left: 50%;
+			    position: absolute;
+			}
+
+			/* DEMO example styles for logo image */
+			.navbar-brand {
+			    padding: 0px;
+			}
+			.navbar-brand>img {
+			    height: 100%;
+			    width: auto;
+			    padding: 7px 14px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+			    	<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+						  <span class="sr-only">Toggle navigation</span>
+						  <span class="icon-bar"></span>
+						  <span class="icon-bar"></span>
+						  <span class="icon-bar"></span>
+						</button>
+					    <a class="navbar-brand" href="/"><img src="https://s3.amazonaws.com/blocknav/assets/blocknav.png" 
+															  alt="Block Navigator"></a>
+			        </div>
+
+			  		<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-left">
+						  <li class="active"><a href="#">Blocks</a></li>
+						  <li><a href="#">TXs</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+						  <li class="active"><a href="#">Pools</a></li>
+						  <li><a href="#">Login</a></li>
+						</ul>
+			  		</div><!--/.nav-collapse -->
+				</div><!--/.container-fluid -->
+		  	</nav>
+		</div>
+		<div class="container">			
+			<div class="row" style="margin-top:25px;">
+				<table class="table table-striped">
+					<thead>
+						<tr class="danger" style="font-weight:bold;">
+							<td>Block Height</td>
+							<td>Block Hash</td>
+							<td>Block Time</td>
+							<td>Chain</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>470215</td>
+							<td>0000e2b</td>
+							<td>1234567890123</td>
+							<td>Main</td>
+						</tr>
+						<tr>
+							<td>470214</td>
+							<td>0000f4d</td>
+							<td>2345678901231</td>
+							<td>Main</td>
+						</tr>
+						<tr>
+							<td>470213</td>
+							<td>0000ba5</td>
+							<td>4387428432232</td>
+							<td>Main</td>
+						</tr>
+					</tbody>					
+				</table>
+			</div>
+		</div>
+
+
+
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script
+			  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+			  crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</body>
+</html>

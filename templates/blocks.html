@@ -1,0 +1,29 @@
+{% extends "_layout.html" %}
+
+
+
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+            <th>Height</th>
+            <th>Block Hash</th>
+            <th>Block Time</th>
+            <th>Chain</th>
+        </thead>
+        <tbody>
+            {% for block in blocks %}
+            <tr>
+                <td><a href="{{ url_for('height', block=block.height) }}">{{ block.height }}</a></td>
+                <td><a href="{{ url_for('block', block=block.hash) }}">{{ block.hash }}</a></td>
+                <td>{{ block.time|datetime }} <small>| <span class="label label-default">{{ block.time }}</span></small></td>
+                <td><small>{% if block.main_chain == True %}<span class="label label-danger">MAIN</span>{% else %}<span class="label label-warning">Forked</span> {% endif %}</small></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="padding-top:15px;"><small class="pull-right"><i class="fa fa-info-circle"></i> Showing the most recent {{ block_count }} blocks...</small></td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

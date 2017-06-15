@@ -1,0 +1,19 @@
+{% extends "_layout.html" %}
+
+
+
+{% block content %}
+    <div class="well well-lg">
+        <div class="row">
+            <h2>Block: {{ block.hash }}</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                left section data
+            </div>
+            <div class="col-lg-6">
+                right section data
+            </div>
+        </div>
+    </div>
+{% endblock %}
