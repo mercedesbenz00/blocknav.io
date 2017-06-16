@@ -2,7 +2,7 @@
     <html lang="en">
         <head>
             <meta charset="utf-8">
-            <title>blocknav.io</title>
+            {% block title %}<title>blocknav.io | A Blockchain Navigation Tool</title>{% endblock %}
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
             <link rel="stylesheet" href="//s3.amazonaws.com/blocknav/bootstrap-flatly.min.css" media="screen">
@@ -13,6 +13,8 @@
             <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
             <![endif]-->
+            {{ moment.include_jquery() }}
+            {{ moment.include_moment() }}
         </head>
         <body>
             <div class="navbar navbar-default navbar-fixed-top">
@@ -50,6 +52,11 @@
                             <li>
                                 <a href="{{ url_for('login') }}">
                                     <i class="fa fa-sign-in"></i> Login
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="label label-default">{{ moment().format(current_time, refresh=True) }}</span>
                                 </a>
                             </li>
                             <!--
@@ -92,17 +99,18 @@
 
             <div class="container">
                 <div class="bs-docs-section">
-                    <div class="row">
+                    <div class="row" style="margin-top:-30px;">
                         {% block content %}{% endblock %}
                     </div>
                 </div>
             </div>
 
+            {% block scripts %}
             <!-- jquery and bs scripts -->
             <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
             <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
             <script src="//s3.amazonaws.com/blocknav/custom.js"></script>
-
+            {% endblock %}
 
         </body>
 </html>

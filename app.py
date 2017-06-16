@@ -12,7 +12,7 @@ import config
 
 bootstrap = Bootstrap()
 app = Flask(__name__)
-moment = Moment()
+moment = Moment(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -25,7 +25,8 @@ def index():
     return render_template(
         'index.html',
         blocks=blocks,
-        stats=get_stats()
+        stats=get_stats(),
+        current_time=datetime.now()
     )
 
 

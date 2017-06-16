@@ -3,33 +3,35 @@
 
 
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-            <th>Height</th>
-            <th>Block Hash</th>
-            <th>Block Time</th>
-            <th>Chain</th>
-        </thead>
-        <tbody>
-            {% for block in blocks %}
-            <tr>
-                <td><a href="{{ url_for('get_block_height', height=block.height) }}">{{ block.height }}</a></td>
-                <td><a href="{{ url_for('block', block=block.hash) }}">{{ block.hash }}</a></td>
-                <td>{{ block.time|datetime }} <a href="#" data-toggle="tooltip" data-placement="right" data-original-title="Unix Time: {{ block.time }}"> <i class="fa fa-clock-o"></i></a></td>
-                <td><small>{% if block.main_chain == True %}<span class="label label-danger"> MAIN </span>{% else %}<span class="label label-warning"> Forked </span> {% endif %}</small></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4" style="padding-top:15px;">
-                    <small class="pull-right">
-                        <i class="fa fa-info-circle"></i> Showing the last 5 blocks...
-                    </small>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <th>Height</th>
+                <th>Block Hash</th>
+                <th>Block Time</th>
+                <th>Chain</th>
+            </thead>
+            <tbody>
+                {% for block in blocks %}
+                <tr>
+                    <td><a href="{{ url_for('get_block_height', height=block.height) }}">{{ block.height }}</a></td>
+                    <td><a href="{{ url_for('block', block=block.hash) }}">{{ block.hash }}</a></td>
+                    <td>{{ block.time|datetime }} <a data-toggle="tooltip" data-placement="left" title="" data-original-title="Unix Time: {{ block.time }}">  <i class="fa fa-clock-o"></i></a></td>
+                    <td><small>{% if block.main_chain == True %}<span class="label label-danger"> MAIN </span>{% else %}<span class="label label-warning"> Forked </span> {% endif %}</small></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="padding-top:15px;">
+                        <small class="pull-right">
+                            <i class="fa fa-info-circle"></i> Showing the last 5 blocks...
+                        </small>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 
 
     <div class="page-header">
@@ -52,12 +54,20 @@
                                 <p class="list-group-item-text">Current Market Price (USD $)</p>
                             </a>
                             <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.trade_volume_usd }}</h4>
+                                <p class="list-group-item-text">Global Trade Volume (USD $)</p>
+                            </a>
+                            <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">{{ stats.trade_volume_btc }}</h4>
                                 <p class="list-group-item-text">Global Trade Volume (in Satoshis)</p>
                             </a>
                             <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">{{ stats.btc_mined }}</h4>
                                 <p class="list-group-item-text">Total Bitcoin Mined</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.miners_revenue_usd }}</h4>
+                                <p class="list-group-item-text">Total Miner's Revenue</p>
                             </a>
                         </div>
                     </div>
@@ -72,12 +82,28 @@
                                 <p class="list-group-item-text">Difficulty</p>
                             </a>
                             <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.next_retarget }}</h4>
+                                <p class="list-group-item-text">Next Difficulty Re-Target</p>
+                            </a>
+                            <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">{{ stats.minutes_between_blocks }}</h4>
                                 <p class="list-group-item-text">Minutes Between Blocks Solved</p>
                             </a>
                             <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading">{{ stats.next_retarget }}</h4>
-                                <p class="list-group-item-text">Next Difficulty Re-Target</p>
+                                <h4 class="list-group-item-heading">{{ stats.timestamp }}</h4>
+                                <p class="list-group-item-text">Latest Timestamp</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.mined_blocks }}</h4>
+                                <p class="list-group-item-text">Total Blocks Mined</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.btc_mined }}</h4>
+                                <p class="list-group-item-text">Bitcoin Mined</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.miners_revenue_btc }}</h4>
+                                <p class="list-group-item-text">Total Miner's Revenue in BTC</p>
                             </a>
                         </div>
                     </div>
@@ -85,7 +111,11 @@
                         <div class="list-group">
                             <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">{{ stats.total_blocks }}</h4>
-                                <p class="list-group-item-text">Total Blocks in Main Chain</p>
+                                <p class="list-group-item-text">Total Blocks</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.blocks_size }}</h4>
+                                <p class="list-group-item-text">Total Block Size</p>
                             </a>
                         </div>
                     </div>
@@ -96,33 +126,36 @@
                                 <p class="list-group-item-text">Total Number of Bitcoin Transactions</p>
                             </a>
                             <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading">{{ stats.number_of_transactions }}</h4>
-                                <p class="list-group-item-text">Total Number of Bitcoin Transactions</p>
-                            </a>
-                            <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">{{ stats.estimated_transaction_volume_usd }}</h4>
                                 <p class="list-group-item-text">Estimated Bitcoin Transaction Volume in USD</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.total_btc_sent }}</h4>
+                                <p class="list-group-item-text">Total Bitcoin Sent</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.total_fees_btc }}</h4>
+                                <p class="list-group-item-text">Total Fees in BTC</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.estimated_btc_sent }}</h4>
+                                <p class="list-group-item-text">Estimated Bitcoin Sent</p>
                             </a>
                         </div>
                     </div>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 {% endblock %}
