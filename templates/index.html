@@ -30,4 +30,99 @@
             </tr>
         </tfoot>
     </table>
+
+
+    <div class="page-header">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4><i class="fa fa-bar-chart"></i> Global Statistics</h4>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#money" data-toggle="tab"><i class="fa fa-money"></i> Money</a></li>
+                    <li><a href="#mining" data-toggle="tab"><i class="fa fa-hashtag"></i> Mining</a></li>
+                    <li><a href="#blocks" data-toggle="tab"><i class="fa fa-th"></i> Blocks</a></li>
+                    <li><a href="#tx" data-toggle="tab"><i class="fa fa-microchip"></i> Transactions</a></li>
+                </ul>
+                <div id="content" class="tab-content">
+                    <div class="tab-pane fade active in" id="money">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.market_price_usd }}</h4>
+                                <p class="list-group-item-text">Current Market Price (USD $)</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.trade_volume_btc }}</h4>
+                                <p class="list-group-item-text">Global Trade Volume (in Satoshis)</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.btc_mined }}</h4>
+                                <p class="list-group-item-text">Total Bitcoin Mined</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="mining">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.hash_rate }}</h4>
+                                <p class="list-group-item-text">Global Hash Rate (H/s)</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.difficulty }}</h4>
+                                <p class="list-group-item-text">Difficulty</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.minutes_between_blocks }}</h4>
+                                <p class="list-group-item-text">Minutes Between Blocks Solved</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.next_retarget }}</h4>
+                                <p class="list-group-item-text">Next Difficulty Re-Target</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="blocks">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.total_blocks }}</h4>
+                                <p class="list-group-item-text">Total Blocks in Main Chain</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tx">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.number_of_transactions }}</h4>
+                                <p class="list-group-item-text">Total Number of Bitcoin Transactions</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.number_of_transactions }}</h4>
+                                <p class="list-group-item-text">Total Number of Bitcoin Transactions</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">{{ stats.estimated_transaction_volume_usd }}</h4>
+                                <p class="list-group-item-text">Estimated Bitcoin Transaction Volume in USD</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

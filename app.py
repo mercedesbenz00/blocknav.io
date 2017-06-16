@@ -106,10 +106,10 @@ def login(username, password):
 
 @app.route('/search', methods=['POST'])
 def search():
-    form = SearchForm()
+    form = SearchForm(request.form)
 
     if request.method == 'POST' and form.validate():
-        search = request.POST.get['search'].strip()
+        search = request.form['search'].strip()
         return redirect(url_for('results', query=search))
     else:
         return redirect(url_for('index'))

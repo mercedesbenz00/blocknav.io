@@ -38,7 +38,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ url_for('pools') }}">
                                     <i class="fa fa-groups"></i> Pools
                                 </a>
                             </li>
@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ url_for('login') }}">
                                     <i class="fa fa-sign-in"></i> Login
                                 </a>
                             </li>
@@ -75,8 +75,6 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <!--<li><a href="#" target="_blank"><i class="fa fa-register"></i> Register</a></li>
-                            <li><a href="#" target="_blank"><i class="fa fa-signin"></i> Login</a></li>-->
                             <form class="navbar-form" role="search" method="post" action="{{ url_for('search') }}" name="search">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Search by Hash, TX, Height, Time..." name="search" id="search">
@@ -93,82 +91,11 @@
 
 
             <div class="container">
-
-                <!--
-                <div class="page-header" id="banner">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-7 col-sm-6">
-                            <h1>Stats</h1>
-                            <p class="lead">Blockchain Statistics</p>
-                        </div>
-                    </div>
-                </div>
-                -->
                 <div class="bs-docs-section">
                     <div class="row">
                         {% block content %}{% endblock %}
                     </div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h3 class="small"><i class="fa fa-bar-chart"></i> Statistics</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="bs-component">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Panel primary</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-success">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Panel success</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-warning">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Panel warning</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="bs-component">
-                                <div class="panel panel-danger">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Panel danger</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Panel info</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
             </div>
 
             <!-- jquery and bs scripts -->
