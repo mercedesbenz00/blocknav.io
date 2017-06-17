@@ -35,8 +35,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
-                                    <i class="fa fa-btc"></i> TXs
+                                <a href="{{ url_for('address') }}">
+                                    <i class="fa fa-map-marker"></i> Address
                                 </a>
                             </li>
                             <li>
@@ -96,12 +96,22 @@
                 </div>
             </div>
 
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="container">
+                        {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible" style="margin-top: 20px;">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p><i class="fa fa-warning"></i> {{ message }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
 
             <div class="container">
-                <div class="bs-docs-section">
-                    <div class="row" style="margin-top:-50px;">
-                        {% block content %}{% endblock %}
-                    </div>
+                <div class="row" style="margin-top: 20px;">
+                    {% block content %}{% endblock %}
                 </div>
             </div>
 

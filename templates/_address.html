@@ -1,0 +1,72 @@
+{% extends "_layout.html" %}
+
+
+{% block content %}
+
+    <div class="page-header" style="margin-top: 20px;">
+        <form class="form-horizontal" method="post" action="{{ url_for('address') }}" name="address_search_form">
+            <label class="control-label" for="focusedInput"><i class="fa fa-map-marker"></i> Search For An Address:</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-map"></i></span>
+                <input class="form-control"
+                       id="focusedInput"
+                       type="text"
+                       name="addr"
+                       value="{{ search_value }}"
+                />
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+            </div>
+        </form>
+    </div>
+
+
+    {% if request.method == 'POST' %}
+        {% if address %}
+            <h5><i class="fa fa-search"></i> Bitcoin Address Located.  Click to Validate.</h5>
+                <div class="well well-lg">
+                    <a href="{{ url_for('get_address', address=address.address) }}" class="text-primary">
+                        <i class="fa fa-map-marker"></i> {{ address.address }}
+                    </a>
+                    <span class="pull-right">
+                        <a href="#" id="qrcode">
+                            <i class="fa fa-qrcode" style="color:black;;"></i>
+                        </a>
+                    </span>
+                </div>
+        {% endif %}
+    {% endif %}
+
+
+
+    {% if address %}
+    <div class="modal fade" id="addr-qrcode-modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><small>BTC Address : QR Code : ( {{ address.address }}</small></h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="{{ qrcode(address.address) }}">
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center"><small>{{ address.address }}</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    {% block scripts %}
+        {{ super() }}
+        <script>
+            $('#qrcode').click(function(){
+                $('#addr-qrcode-modal').modal('show');
+            });
+        </script>
+    {% endblock %}
+
+{% endblock %}

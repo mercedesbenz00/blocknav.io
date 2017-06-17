@@ -1,28 +1,60 @@
 {% extends "_layout.html" %}
 
 {% block content %}
-
-    <div class="page-header" id="api_docs" style="margin-top: -105px;">
-        <div class="row">
-            <div class="col-lg-8 col-md-7 col-sm-6">
-                <h1>API</h1>
-                <p class="lead">Blockchain API (Python)</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-4">
-                <div class="list-group table-of-contents">
-                    <a class="list-group-item" href="#be">Block Explorer</a>
-                    <a class="list-group-item" href="#stats">Statistics</a>
-                    <a class="list-group-item" href="#wallet">Wallet</a>
-                    <a class="list-group-item" href="#pushtx">Push TX</a>
-                    <a class="list-group-item" href="#receive">v2.Receive</a>
-                    <a class="list-group-item" href="#rates">Exchange Rates</a>
-                    <a class="list-group-item" href="#create">Create Wallet</a>
+    <div class="col-lg-12">
+        <div class="page-header" id="api_docs" style="margin-top: -25px;">
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-6">
+                    <h1>API</h1>
+                    <p class="lead">Blockchain API (Python)</p>
+                    <a href="https://blockchain.info/api" target="_blank">
+                        <small><i class="fa fa-arrow-circle-right"></i> https://blockchain.info/api</small>
+                    </a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="list-group table-of-contents">
+                        <a class="list-group-item" href="#blockexp">Block Explorer</a>
+                        <a class="list-group-item" href="#stats">Statistics</a>
+                        <a class="list-group-item" href="#wallet">Wallet</a>
+                        <a class="list-group-item" href="#pushtx">Push TX</a>
+                        <a class="list-group-item" href="#receive">v2.Receive</a>
+                        <a class="list-group-item" href="#rates">Exchange Rates</a>
+                        <a class="list-group-item" href="#create">Create Wallet</a>
+                    </div>
+                </div>
+            </div>
+            <div id="blockexp" style="margin-top: 25px;">
+                <h3><i class="fa fa-th"></i> Block Explorer</h3>
+                {% include 'markdown/block_explorer.md' %}
+            </div>
+            <div id="stats" style="margin-top: 25px;">
+                <h3><i class="fa fa-bar-chart"></i> Statistics</h3>
+                {% include 'markdown/statistics.md' %}
+            </div>
+            <div id="wallet" style="margin-top: 25px;">
+                <h3><i class="fa fa-money"></i> Wallet</h3>
+                {% include 'markdown/wallet.md' %}
+            </div>
+            <div id="pushtx" style="margin-top: 25px;">
+                <h3><i class="fa fa-btc"></i> Push TX</h3>
+                {% include 'markdown/pushtx.md' %}
+            </div>
+            <div id="receive" style="margin-top: 25px;">
+                <h3><i class="fa fa-wifi"></i> v2.Receive</h3>
+                {% include 'markdown/v2-receive.md' %}
+            </div>
+            <div id="rates" style="margin-top: 25px;">
+                <h3><i class="fa fa-euro"></i> Exchange Rates</h3>
+                {% include 'markdown/rates.md' %}
+            </div>
+            <div id="create" style="margin-top: 25px;">
+                <h3><i class="fa fa-gear"></i> Create Wallet</h3>
+                {% include 'markdown/create_wallet.md' %}
+            </div>
+
         </div>
     </div>
-
 
 {% endblock %}

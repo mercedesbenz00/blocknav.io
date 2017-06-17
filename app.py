@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, flash, url_for, session
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from flask_misaka import Misaka
 from blockchain import blockexplorer as be
 from blockchain import statistics
 from blockchain.exceptions import APIException
 from flask_qrcode import QRcode
 from datetime import datetime
-from forms import SearchForm
+from forms import SearchForm, AddressSearchForm, RegistrationForm
 import config
 
 bootstrap = Bootstrap()
 app = Flask(__name__)
 moment = Moment(app)
 QRcode(app)
+Misaka(app)
+
+app.secret_key = config.SECRET_KEY
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -56,7 +60,8 @@ def block(block):
 
     return render_template(
         'block.html',
-        block=block
+        block=block,
+        current_time=datetime.now().strftime('LLL')
     )
 
 
@@ -73,7 +78,8 @@ def get_block_height(height):
         'blocks_by_height.html',
         blocks=blocks,
         stats=stats,
-        block_count=block_count
+        block_count=block_count,
+        current_time=datetime.now().strftime('LLL')
     )
 
 
@@ -88,9 +94,41 @@ def get_address(address):
     )
 
 
-@app.route('/tx/<string:tx>', methods=['GET', 'POST'])
-def transaction(tx):
-    pass
+@app.route('/address', methods=['GET', 'POST'])
+def address():
+    form = AddressSearchForm(request.form)
+
+    if request.method == 'POST':
+        addr = request.form['addr'].strip()
+        try:
+            clean_addr = str(addr)
+            if len(clean_addr) == 34:
+                try:
+                    address = be.get_address(clean_addr)
+                    return render_template(
+                        '_address.html',
+                        address=address,
+                        search_value=addr,
+                        current_time=datetime.now().strftime('LLL')
+                    )
+
+                except APIException as e:
+                    flash('API Error', 'warning')
+                    return redirect(url_for('address'))
+            else:
+                message = 'The Bitcoin address is malformed.  Please check your data and try again.'
+                flash(message, 'danger')
+                redirect(url_for('address'))
+        except (ValueError, TypeError) as err:
+            message = 'An error has occurred: ' + str(err)
+            flash(message, 'danger')
+            return redirect(url_for('address'))
+    else:
+        return render_template(
+            '_address.html',
+            form=form,
+            current_time=datetime.now().strftime('LLL')
+        )
 
 
 @app.route('/pools', methods=['GET', 'POST'])
@@ -115,6 +153,17 @@ def api_docs():
 def login():
     return render_template(
         'login.html',
+        current_time=datetime.now().strftime('LLL')
+    )
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+
+    return render_template(
+        'register.html',
+        form=form,
         current_time=datetime.now().strftime('LLL')
     )
 
@@ -148,9 +197,15 @@ def results(query):
         except APIException as e:
             print('Error ' + str(e))
     else:
+        type = 'Block Height Info'
         try:
-            search_results = be.get_block_height(query)
-            type = 'Block Height Info'
+            try:
+                n = int(query)
+                search_results = be.get_block_height(n)
+            except (ValueError, TypeError) as err:
+                search_results = str('Invalid query expression. ' + str(err))
+                flash(search_results, 'danger')
+                return redirect(url_for('index'))
         except APIException as e:
             print('Error ' + str(e))
 
@@ -158,7 +213,8 @@ def results(query):
         'results.html',
         query=query,
         search_results=search_results,
-        type=type
+        type=type,
+        current_time=datetime.now().strftime('LLL')
     )
 
 

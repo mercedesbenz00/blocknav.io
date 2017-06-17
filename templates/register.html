@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        {% block title %}<title>blocknav.io | A Blockchain Navigation Tool</title>{% endblock %}
+        {% block title %}<title>blocknav.io | A Blockchain Navigation Tool | Register</title>{% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <link rel="stylesheet" href="//s3.amazonaws.com/blocknav/bootstrap-flatly.min.css" media="screen">
@@ -40,7 +40,7 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="#">
-                                <i class="fa fa-lock"></i> Login
+                                <i class="fa fa-user-circle-o"></i> New User Registration
                             </a>
                         </li>
                     </ul>
@@ -49,8 +49,8 @@
                         <li><a href="{{ url_for('index') }}">
                             <i class="fa fa-home"></i> Home</a>
                         </li>
-                        <li><a href="{{ url_for('register') }}">
-                            <i class="fa fa-user-circle-o"></i> Register</a>
+                        <li><a href="{{ url_for('login') }}">
+                            <i class="fa fa-lock"></i> Login</a>
                         </li>
                     </ul>
 
@@ -60,29 +60,33 @@
 
         <div class="container">
             <div class="col-lg-6 col-centered">
+                <div class="alert alert-info">
+                    <p><i class="fa fa-warning"></i> Sorry, new user registration is temporarily closed.</p>
+                </div>
                 <form class="form-horizontal">
                     <fieldset>
                         <div class="form-group">
-                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <label for="inputEmail" class="col-lg-2 control-label">Name:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputFullName" placeholder="Full Name" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email:</label>
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" id="inputEmail" placeholder="Email" autocomplete="off" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                            <label for="inputPassword" class="col-lg-2 control-label">Password:</label>
                             <div class="col-lg-10">
                                 <input type="password" class="form-control" id="inputPassword" placeholder="Password" autocomplete="off" />
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Remember Me
-                                    </label>
-                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-arrow-circle-right"></i> Login
+                                <button type="submit" class="btn btn-primary disabled">
+                                    <i class="fa fa-arrow-circle-right"></i> Register
                                 </button>
                                 <button type="reset" class="btn btn-default" onclick="location.href='/'">
                                     <i class="fa fa-times-rectangle-o"></i> Cancel
