@@ -41,11 +41,11 @@
                             </li>
                             <li>
                                 <a href="{{ url_for('pools') }}">
-                                    <i class="fa fa-groups"></i> Pools
+                                    <i class="fa fa-chain"></i> Pools
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ url_for('api_docs') }}">
                                     <i class="fa fa-gear"></i> API
                                 </a>
                             </li>
@@ -56,7 +56,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="label label-default">{{ moment().format(current_time, refresh=True) }}</span>
+                                    <span class="label label-info">System Time: {{ moment().format(current_time, refresh=True) }}</span>
                                 </a>
                             </li>
                             <!--
@@ -99,7 +99,7 @@
 
             <div class="container">
                 <div class="bs-docs-section">
-                    <div class="row" style="margin-top:-30px;">
+                    <div class="row" style="margin-top:-50px;">
                         {% block content %}{% endblock %}
                     </div>
                 </div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        {% block title %}<title>blocknav.io | A Blockchain Navigation Tool</title>{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <link rel="stylesheet" href="//s3.amazonaws.com/blocknav/bootstrap-flatly.min.css" media="screen">
+        <link rel="stylesheet" href="//s3.amazonaws.com/blocknav/custom.min.css" media="screen">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        {{ moment.include_jquery() }}
+        {{ moment.include_moment() }}
+
+        <style>
+            .col-centered{
+                float: none;
+                margin: 0 auto;
+                margin-top: 75px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand"><i class="fa fa-th"></i> blocknav.io</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-lock"></i> Login
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('index') }}" target="_blank">
+                            <i class="fa fa-home"></i> Home</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-lg-6 col-centered">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" autocomplete="off" />
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-arrow-circle-right"></i> Login
+                                </button>
+                                <button type="reset" class="btn btn-default" onclick="location.href='/'">
+                                    <i class="fa fa-times-rectangle-o"></i> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div> <!-- end: container -->
+
+        <!-- scripts -->
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="//s3.amazonaws.com/blocknav/custom.js"></script>
+
+    </body>
+</html>
+

@@ -4,6 +4,54 @@
 
 {% block content %}
 
-    {{ search_results }}
+    <div class="page-header" style="margin-top: -25px;">
+        <h4>{% if type == 'Block Info' %}
+                <i class="fa fa-th"></i> Block Details
+            {% elif type == 'Address Info' %}
+                <i class="fa fa-map-marker"></i> Address Details
+            {% else %}
+                <i class="fa fa-th-list"></i> Block Height Details
+            {% endif %}
+        </h4>
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5><i class="fa fa-info-circle"></i> Your Search Results..</h5>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    {% if type == 'Block Info' %}
+                        <a href="{{ url_for('block', block=search_results.hash) }}" class="list-group-item">
+                            <h4 class="list-group-item-heading">{{ search_results.hash }}</h4>
+                            <p class="list-group-item-text">Block Hash</p>
+                        </a>
+                    {% elif type == 'Address Info' %}
+                        <a href="{{ url_for('get_address', address=search_results.address) }}" class="list-group-item">
+                            <h4 class="list-group-item-heading">{{ search_results.address }}</h4>
+                            <p class="list-group-item-text">Bitcoin Address</p>
+                            <p style="margin-top: 15px;"><small><i class="fa fa-arrow-circle-right"></i> Click address for full details...</small></p>
+                        </a>
+                    {% elif type == 'Block Height Info' %}
+                        <a href="{{ url_for('block', height=search_results[0].block) }}" class="list-group-item">
+                            <h4 class="list-group-item-heading">Block Height: {{ search_results[0].height }}</h4>
+                            <p class="list-group-item-text">Block Hash: {{ search_results[0].hash }}</p>
+                            <p class="list-group-item-text">Block Time{{ search_results[0].time|datetime }}
+                                <small><span class="label label-default"> | {{ search_results[0].time }}</span></small>
+                            </p>
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('index') }}" class="list-group-item">
+                            <h4 class="list-group-item-heading"><i class="fa fa-warning"></i> No Matching Data Found</h4>
+                            <p class="list-group-item-text">Sorry, we could not find anything matching your query params.</p>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="panel-footer">
+                <small><i class="fa fa-info-circle"></i> Powered by Flask and Python.</small>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

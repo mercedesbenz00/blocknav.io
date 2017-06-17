@@ -6,6 +6,7 @@ from flask_moment import Moment
 from blockchain import blockexplorer as be
 from blockchain import statistics
 from blockchain.exceptions import APIException
+from flask_qrcode import QRcode
 from datetime import datetime
 from forms import SearchForm
 import config
@@ -13,6 +14,7 @@ import config
 bootstrap = Bootstrap()
 app = Flask(__name__)
 moment = Moment(app)
+QRcode(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -26,7 +28,7 @@ def index():
         'index.html',
         blocks=blocks,
         stats=get_stats(),
-        current_time=datetime.now()
+        current_time=datetime.now().strftime('LLL')
     )
 
 
@@ -75,9 +77,15 @@ def get_block_height(height):
     )
 
 
-@app.route('/block/<int:btime>', methods=['GET', 'POST'])
-def get_block_by_time(btime):
-    pass
+@app.route('/address/<string:address>', methods=['GET', 'POST'])
+def get_address(address):
+    addr = be.get_address(address)
+
+    return render_template(
+        'address.html',
+        addr=addr,
+        current_time=datetime.now().strftime('LLL')
+    )
 
 
 @app.route('/tx/<string:tx>', methods=['GET', 'POST'])
@@ -97,12 +105,18 @@ def pool(pool):
 
 @app.route('/api', methods=['GET'])
 def api_docs():
-    pass
+    return render_template(
+        'api.html',
+        current_time=datetime.now().strftime('LLL')
+    )
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login(username, password):
-    pass
+def login():
+    return render_template(
+        'login.html',
+        current_time=datetime.now().strftime('LLL')
+    )
 
 
 @app.route('/search', methods=['POST'])
@@ -121,26 +135,24 @@ def results(query):
     search_results = None
     type = None
 
-    form = SearchForm(request.form)
-    if request.method == 'POST' and form.validate():
-        if len(query) > 63:
-            try:
-                search_results = be.get_block(query)
-                type = 'Block Info'
-            except APIException as e:
-                print('An API error has occurred ' + str(e))
-        elif len(query) > 33:
-            try:
-                search_results = be.get_address(query)
-                type = 'Address Info'
-            except APIException as e:
-                print('Error ' + str(e))
-        else:
-            try:
-                search_results = be.get_block_height(query)
-                type = 'Block Height Info'
-            except APIException as e:
-                print('Error ' + str(e))
+    if len(query) > 63:
+        try:
+            search_results = be.get_block(query)
+            type = 'Block Info'
+        except APIException as e:
+            print('An API error has occurred ' + str(e))
+    elif len(query) > 33:
+        try:
+            search_results = be.get_address(query)
+            type = 'Address Info'
+        except APIException as e:
+            print('Error ' + str(e))
+    else:
+        try:
+            search_results = be.get_block_height(query)
+            type = 'Block Height Info'
+        except APIException as e:
+            print('Error ' + str(e))
 
     return render_template(
         'results.html',
@@ -164,6 +176,7 @@ def convert_unixtime(unixtime, format='medium'):
 
 if __name__ == '__main__':
     app.run(
+        host='0.0.0.0',
         port=config.PORT,
         debug=config.DEBUG
     )
