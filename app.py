@@ -55,12 +55,14 @@ def blocks():
 def block(block):
     try:
         block = be.get_block(block)
+        transactions = block.transactions
     except APIException as e:
         print('Error ' + str(e))
 
     return render_template(
         'block.html',
         block=block,
+        transactions=transactions,
         current_time=datetime.now().strftime('LLL')
     )
 
@@ -85,11 +87,16 @@ def get_block_height(height):
 
 @app.route('/address/<string:address>', methods=['GET', 'POST'])
 def get_address(address):
-    addr = be.get_address(address)
+    try:
+        addr = be.get_address(address)
+        tx = addr.transactions
+    except APIException as e:
+        print('Error ' + str(e))
 
     return render_template(
         'address.html',
         addr=addr,
+        tx=tx,
         current_time=datetime.now().strftime('LLL')
     )
 
@@ -105,6 +112,7 @@ def address():
             if len(clean_addr) == 34:
                 try:
                     address = be.get_address(clean_addr)
+
                     return render_template(
                         '_address.html',
                         address=address,
