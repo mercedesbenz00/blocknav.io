@@ -141,7 +141,10 @@ def address():
 
 @app.route('/pools', methods=['GET', 'POST'])
 def pools():
-    pass
+    return render_template(
+        'pools.html',
+        current_time=datetime.now().strftime('LLL')
+    )
 
 
 @app.route('/pool/<string:pool>', methods=['GET', 'POST'])

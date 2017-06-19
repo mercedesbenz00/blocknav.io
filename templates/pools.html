@@ -1,0 +1,75 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+    <div class="page-header" style="margin-top: 10px;">
+        <div class="jumbotron">
+            <h1>Mining Pools</h1>
+            <p class="lead">BTC Mining Pool Distribution Calculated by Blocks</p>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5><i class="fa fa-chain"></i> Mining Pool List</h5>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Pool Name</th>
+                            <th>Location</th>
+                            <th>Blocks Mined</th>
+                            <th>Hash Rate</th>
+                            <th>Rate Share</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="info">
+                            <td>Entire BTC Network</td>
+                            <td>Multi-Location</td>
+                            <td>430</td>
+                            <td>4.98 EH/s</td>
+                            <td><span class="label label-warning">100 %</span></td>
+                        </tr>
+                        <tr>
+                            <td>AntPool</td>
+                            <td>China</td>
+                            <td>430</td>
+                            <td>729.42 PH/s</td>
+                            <td><span class="label label-success">14.65 %</span></td>
+                        </tr>
+                        <tr>
+                            <td>BTC.TOP</td>
+                            <td>China/US</td>
+                            <td>57</td>
+                            <td>659.95 PH/s</td>
+                            <td><span class="label label-success">13.26 %</span></td>
+                        </tr>
+                        <tr>
+                            <td>BTC.com</td>
+                            <td>China/US</td>
+                            <td>39</td>
+                            <td>451.55 PH/s</td>
+                            <td><span class="label label-success">9.07 %</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bixin</td>
+                            <td>China</td>
+                            <td>38</td>
+                            <td>439.97 PH/s</td>
+                            <td><span class="label label-success">8.84 %</span></td>
+                        </tr>
+                        <tr>
+                            <td>SlushPool</td>
+                            <td>Global</td>
+                            <td>17</td>
+                            <td>196.83 PH/s</td>
+                            <td><span class="label label-success">3.95 %</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
