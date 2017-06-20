@@ -92,7 +92,7 @@
                             <tr>
                                 <td>{{ tx.block_height }}</td>
                                 <td>{{ tx.tx_index}}</td>
-                                <td>{{ tx.hash }}</td>
+                                <td><a href="{{ url_for('tx', hash=tx.hash) }}">{{ tx.hash }}</a></td>
                                 <td>{{ tx.size }}</td>
                                 <td>{{ tx.relayed_by}}</td>
                             </tr>

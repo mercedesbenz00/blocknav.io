@@ -142,6 +142,22 @@ def address():
         )
 
 
+@app.route('/tx/<string:hash>', methods=['GET', 'POST'])
+def tx(hash):
+    try:
+        tx = be.get_tx(hash)
+    except APIException as e:
+        message = 'There has been an API Error.'
+        flash(message, 'danger')
+        return redirect(url_for('index'))
+
+    return render_template(
+        'transaction.html',
+        tx=tx,
+        current_time=datetime.now().strftime('LLL')
+    )
+
+
 @app.route('/pools', methods=['GET', 'POST'])
 def pools():
     return render_template(

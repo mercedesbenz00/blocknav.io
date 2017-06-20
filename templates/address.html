@@ -29,7 +29,7 @@
                     </a>
                     <a href="#" class="list-group-item">
                         <h4 class="list-group-item-heading">{{ addr.total_received }}</h4>
-                        <p class="list-group-item-text">Total Received in HTC</p>
+                        <p class="list-group-item-text">Total Received in BTC</p>
                     </a>
                     <a href="#" class="list-group-item">
                         <h4 class="list-group-item-heading">{{ addr.final_balance }}</h4>
@@ -50,6 +50,7 @@
                             <tr>
                                 <th>Block Height</th>
                                 <th>Block Size</th>
+                                <th>Tx Hash</th>
                                 <th>Tx Index</th>
                                 <th>Version</th>
                                 <th>Time</th>
@@ -59,11 +60,12 @@
                         <tbody>
                         {% for t in tx %}
                             <tr>
-                                <td>{{ t.block_height }}</td>
+                                <td><a href="{{ url_for('get_block_height', height=t.block_height) }}">{{ t.block_height }}</a></td>
                                 <td>{{ t.size }}</td>
+                                <td><a href="{{ url_for('tx', hash=t.hash) }}">{{ t.hash }}</a></td>
                                 <td>{{ t.tx_index }}</td>
                                 <td>{{ t.version }}</td>
-                                <td>{{ t.time|datetime }}</td>
+                                <td>{{ t.time|datetime }} <a data-toggle="tooltip" data-placement="left" title="" data-original-title="Unix Time: {{ t.time }}"><i class="fa fa-clock-o"></i></a></td>
                                 <td>{{ t.relayed_by }}</td>
                             </tr>
                         {% endfor %}
@@ -80,7 +82,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><small>BTC Address : QR Code : ( {{ addr.address }}</small></h4>
+                    <h4 class="modal-title"><small>BTC Address : QR Code : ( {{ addr.address }} )</small></h4>
                 </div>
                 <div class="modal-body text-center">
                     <img src="{{ qrcode(addr.address) }}">
@@ -96,6 +98,7 @@
     {% block scripts %}
         {{ super() }}
         <script>
+            $('[data-toggle="tooltip"]').tooltip();
             $('#qrcode').click(function(){
                 $('#addr-qrcode-modal').modal('show');
             });
