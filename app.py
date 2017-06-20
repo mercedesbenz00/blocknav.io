@@ -71,6 +71,8 @@ def block(block):
 def get_block_height(height):
     try:
         blocks = be.get_block_height(height)
+        if blocks:
+            block_height = blocks[0].height
         stats = get_stats()
         block_count = len(blocks)
     except APIException as e:
@@ -81,6 +83,7 @@ def get_block_height(height):
         blocks=blocks,
         stats=stats,
         block_count=block_count,
+        block_height=block_height,
         current_time=datetime.now().strftime('LLL')
     )
 
