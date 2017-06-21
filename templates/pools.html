@@ -1,12 +1,18 @@
 {% extends "_layout.html" %}
-
+{% block head %}
+    <style>
+        .big-icon {
+            font-size: 192px;
+        }
+    </style>
+{% endblock %}
 {% block content %}
 
     <div class="page-header" style="margin-top: 10px;">
         <div class="jumbotron">
-            <h1>Mining Pools</h1>
+            <h1><strong>Mining Pools</strong></h1>
             <p class="lead">BTC Mining Pool Distribution Calculated by Blocks</p>
-            <i class="fa fa-chain fa-5x pull-right"></i>
+            <i class="fa fa-chain big-icon pull-right" style="margin-top:-165px;"></i>
         </div>
 
         <div class="panel panel-default">
@@ -33,35 +39,35 @@
                             <td><span class="label label-warning">100 %</span></td>
                         </tr>
                         <tr>
-                            <td>AntPool</td>
+                            <td><a href="{{ url_for('pool', pool='AntPool') }}">AntPool</a></td>
                             <td>China</td>
                             <td>430</td>
                             <td>729.42 PH/s</td>
                             <td><span class="label label-success">14.65 %</span></td>
                         </tr>
                         <tr>
-                            <td>BTC.TOP</td>
+                            <td><a href="{{ url_for('pool', pool='BTC.TOP') }}">BTC.TOP</a></td>
                             <td>China/US</td>
                             <td>57</td>
                             <td>659.95 PH/s</td>
                             <td><span class="label label-success">13.26 %</span></td>
                         </tr>
                         <tr>
-                            <td>BTC.com</td>
+                            <td><a href="{{ url_for('pool', pool='BTC.com') }}">BTC.com</a></td>
                             <td>China/US</td>
                             <td>39</td>
                             <td>451.55 PH/s</td>
                             <td><span class="label label-success">9.07 %</span></td>
                         </tr>
                         <tr>
-                            <td>Bixin</td>
+                            <td><a href="{{ url_for('pool', pool='Bixin') }}">Bixin</a></td>
                             <td>China</td>
                             <td>38</td>
                             <td>439.97 PH/s</td>
                             <td><span class="label label-success">8.84 %</span></td>
                         </tr>
                         <tr>
-                            <td>SlushPool</td>
+                            <td><a href="{{ url_for('pool', pool='SlushPool') }}">SlushPool</a></td>
                             <td>Global</td>
                             <td>17</td>
                             <td>196.83 PH/s</td>

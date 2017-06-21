@@ -7,7 +7,7 @@
         <div class="panel-heading">
             <h5><i class="fa fa-btc"></i> Transaction Detail for:  {{ tx.hash }}
                 <span class="pull-right">
-                    <a href="" class="btn btn-sm btn-success">
+                    <a href="{{ url_for('block', block=block[0].hash) }}" class="btn btn-xs btn-success" style="margin-top: -5px;">
                         <i class="fa fa-arrow-circle-left"></i> Return to Block Detail
                     </a>
                 </span>

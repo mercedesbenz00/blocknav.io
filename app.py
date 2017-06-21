@@ -19,12 +19,13 @@ QRcode(app)
 Misaka(app)
 
 app.secret_key = config.SECRET_KEY
+app.api_code = config.API_KEY
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     try:
-        blocks = be.get_blocks()[:5]
+        blocks = be.get_blocks(api_code=app.api_code)[:5]
     except APIException as e:
         print('Sorry, an API error has occurred ' + str(e))
 
@@ -39,7 +40,7 @@ def index():
 @app.route('/blocks', methods=['GET', 'POST'])
 def blocks():
     try:
-        blocks = be.get_blocks()
+        blocks = be.get_blocks(api_code=app.api_code)
         block_count = len(blocks)
     except APIException as e:
         print('Sorry, an API error has occurred ' + str(e))
@@ -54,7 +55,7 @@ def blocks():
 @app.route('/block/<string:block>', methods=['GET', 'POST'])
 def block(block):
     try:
-        block = be.get_block(block)
+        block = be.get_block(block, api_code=app.api_code)
         transactions = block.transactions
     except APIException as e:
         print('Error ' + str(e))
@@ -70,7 +71,7 @@ def block(block):
 @app.route('/block/<int:height>', methods=['GET', 'POST'])
 def get_block_height(height):
     try:
-        blocks = be.get_block_height(height)
+        blocks = be.get_block_height(height, api_code=app.api_code)
         if blocks:
             block_height = blocks[0].height
         stats = get_stats()
@@ -91,7 +92,7 @@ def get_block_height(height):
 @app.route('/address/<string:address>', methods=['GET', 'POST'])
 def get_address(address):
     try:
-        addr = be.get_address(address)
+        addr = be.get_address(address, api_code=app.api_code)
         tx = addr.transactions
     except APIException as e:
         print('Error ' + str(e))
@@ -114,7 +115,7 @@ def address():
             clean_addr = str(addr)
             if len(clean_addr) == 34:
                 try:
-                    address = be.get_address(clean_addr)
+                    address = be.get_address(clean_addr, api_code=app.api_code)
 
                     return render_template(
                         '_address.html',
@@ -145,7 +146,8 @@ def address():
 @app.route('/tx/<string:hash>', methods=['GET', 'POST'])
 def tx(hash):
     try:
-        tx = be.get_tx(hash)
+        tx = be.get_tx(hash, api_code=app.api_code)
+        blk = be.get_block_height(tx.block_height, api_code=app.api_code)
     except APIException as e:
         message = 'There has been an API Error.'
         flash(message, 'danger')
@@ -154,6 +156,7 @@ def tx(hash):
     return render_template(
         'transaction.html',
         tx=tx,
+        block=blk,
         current_time=datetime.now().strftime('LLL')
     )
 
@@ -168,7 +171,23 @@ def pools():
 
 @app.route('/pool/<string:pool>', methods=['GET', 'POST'])
 def pool(pool):
-    pass
+    blocks = None
+    block_count = None
+    try:
+        blocks = be.get_blocks(pool_name=pool, api_code=app.api_code)
+        block_count = len(blocks)
+    except APIException as e:
+        message = 'Sorry, an API exception occurred ' + str(e)
+        flash(message, 'danger')
+        return redirect(url_for('index'))
+
+    return render_template(
+        'pool.html',
+        blocks=blocks,
+        pool_name=pool,
+        block_count=block_count,
+        current_time=datetime.now().strftime('LLL')
+    )
 
 
 @app.route('/api', methods=['GET'])
@@ -216,7 +235,7 @@ def results(query):
 
     if len(query) > 63:
         try:
-            search_results = be.get_block(query)
+            search_results = be.get_block(query, api_code=app.api_code)
             type = 'Block Info'
         except APIException as e:
             print('An API error has occurred ' + str(e))
@@ -231,7 +250,7 @@ def results(query):
         try:
             try:
                 n = int(query)
-                search_results = be.get_block_height(n)
+                search_results = be.get_block_height(n, api_code=app.api_code)
             except (ValueError, TypeError) as err:
                 search_results = str('Invalid query expression. ' + str(err))
                 flash(search_results, 'danger')
@@ -249,7 +268,7 @@ def results(query):
 
 
 def get_stats():
-    stats = statistics.get()
+    stats = statistics.get(api_code=app.api_code)
     return stats
 
 

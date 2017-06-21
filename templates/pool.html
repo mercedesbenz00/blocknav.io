@@ -1,0 +1,56 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+    <div class="page-header" style="margin-top: 10px;">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5><i class="fa fa-chain"></i> Mining Blocks by Pool: {{ pool_name }}
+                    <span class="pull-right"><a href="{{ url_for('pools') }}" class="btn btn-xs btn-success" style="margin-top: -5px;"><i class="fa fa-arrow-circle-left"></i> Return to Pools</a> </span>
+                </h5>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Height</th>
+                            <th>Block Hash</th>
+                            <th>Block Time</th>
+                            <th>Chain</th>
+                        </thead>
+                        <tbody>
+                            {% for block in blocks %}
+                            <tr>
+                                <td><a href="{{ url_for('get_block_height', height=block.height) }}">{{ block.height }}</a></td>
+                                <td><a href="{{ url_for('block', block=block.hash) }}">{{ block.hash }}</a></td>
+                                <td>{{ block.time|datetime }} <a data-toggle="tooltip" data-placement="left" title="" data-original-title="Unix Time: {{ block.time }}">  <i class="fa fa-clock-o"></i></a></td>
+                                <td><small>{% if block.main_chain == True %}<span class="label label-danger"> MAIN </span>{% else %}<span class="label label-warning"> Forked </span> {% endif %}</small></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" style="padding-top:15px;">
+                                    <small class="pull-right">
+                                        <i class="fa fa-info-circle"></i> Showing the last {{ block_count }} blocks...
+                                    </small>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock %}
