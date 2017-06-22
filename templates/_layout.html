@@ -2,7 +2,7 @@
     <html lang="en">
         <head>
             <meta charset="utf-8">
-            {% block title %}<title>blocknav.io | A Blockchain Navigation Tool</title>{% endblock %}
+            {% block title %}<title>blocknav.io &raquo; A Blockchain Navigation Tool</title>{% endblock %}
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
             <link rel="stylesheet" href="//s3.amazonaws.com/blocknav/bootstrap-flatly.min.css" media="screen">
@@ -113,6 +113,15 @@
             <div class="container">
                 <div class="row" style="margin-top: 20px;">
                     {% block content %}{% endblock %}
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="container">
+                    <div class="text-center" style="padding:50px;">
+                        <i class="fa fa-copyright"></i> 2017 <a href="http://www.python-development-systems.com" target="_blank">Python Development Systems, LLC.</a>  All Rights Reserved. <br />
+                        API and Blockchain Data provided by <a href="https://www.blockchain.info" target="_blank">blockchain.info</a>
+                    </div>
                 </div>
             </div>
 

@@ -24,6 +24,7 @@ app.api_code = config.API_KEY
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    blocks = None
     try:
         blocks = be.get_blocks(api_code=app.api_code)[:5]
     except APIException as e:
