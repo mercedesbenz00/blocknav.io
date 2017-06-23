@@ -76,30 +76,30 @@
             </div>
             <div class="panel-footer">
                 <h5><i class="fa fa-btc"></i> Block TXs: ({{ block.n_tx }})</h5>
-
-                    <table class="table table-striped table-responsive">
-                        <thead>
-                            <tr>
-                                <th>Height</th>
-                                <th>Index</th>
-                                <th>Hash</th>
-                                <th>Block Size</th>
-                                <th>Relayed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for tx in transactions %}
-                            <tr>
-                                <td>{{ tx.block_height }}</td>
-                                <td>{{ tx.tx_index}}</td>
-                                <td><a href="{{ url_for('tx', hash=tx.hash) }}">{{ tx.hash }}</a></td>
-                                <td>{{ tx.size }}</td>
-                                <td>{{ tx.relayed_by}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Height</th>
+                                    <th>Index</th>
+                                    <th>Hash</th>
+                                    <th>Block Size</th>
+                                    <th>Relayed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for tx in transactions %}
+                                <tr>
+                                    <td>{{ tx.block_height }}</td>
+                                    <td>{{ tx.tx_index}}</td>
+                                    <td><a href="{{ url_for('tx', hash=tx.hash) }}">{{ tx.hash }}</a></td>
+                                    <td>{{ tx.size }}</td>
+                                    <td>{{ tx.relayed_by}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
 
             </div>
         </div>

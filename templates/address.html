@@ -44,33 +44,34 @@
             <div class="panel-footer">
                 <small>
                 <h4><i class="fa fa-btc"></i> Transactions for {{ addr.address }}</h4>
-
-                    <table class="table table-striped table-responsive">
-                        <thead>
-                            <tr>
-                                <th>Block Height</th>
-                                <th>Block Size</th>
-                                <th>Tx Hash</th>
-                                <th>Tx Index</th>
-                                <th>Version</th>
-                                <th>Time</th>
-                                <th>Relayed By</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for t in tx %}
-                            <tr>
-                                <td><a href="{{ url_for('get_block_height', height=t.block_height) }}">{{ t.block_height }}</a></td>
-                                <td>{{ t.size }}</td>
-                                <td><a href="{{ url_for('tx', hash=t.hash) }}">{{ t.hash }}</a></td>
-                                <td>{{ t.tx_index }}</td>
-                                <td>{{ t.version }}</td>
-                                <td>{{ t.time|datetime }} <a data-toggle="tooltip" data-placement="left" title="" data-original-title="Unix Time: {{ t.time }}"><i class="fa fa-clock-o"></i></a></td>
-                                <td>{{ t.relayed_by }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Block Height</th>
+                                    <th>Block Size</th>
+                                    <th>Tx Hash</th>
+                                    <th>Tx Index</th>
+                                    <th>Version</th>
+                                    <th>Time</th>
+                                    <th>Relayed By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for t in tx %}
+                                <tr>
+                                    <td><a href="{{ url_for('get_block_height', height=t.block_height) }}">{{ t.block_height }}</a></td>
+                                    <td>{{ t.size }}</td>
+                                    <td><a href="{{ url_for('tx', hash=t.hash) }}">{{ t.hash }}</a></td>
+                                    <td>{{ t.tx_index }}</td>
+                                    <td>{{ t.version }}</td>
+                                    <td>{{ t.time|datetime }} <a data-toggle="tooltip" data-placement="left" title="" data-original-title="Unix Time: {{ t.time }}"><i class="fa fa-clock-o"></i></a></td>
+                                    <td>{{ t.relayed_by }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </small>
             </div>
         </div>
