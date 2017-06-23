@@ -13,7 +13,7 @@ from forms import SearchForm, AddressSearchForm, RegistrationForm
 import config
 
 bootstrap = Bootstrap()
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 moment = Moment(app)
 QRcode(app)
 Misaka(app)
