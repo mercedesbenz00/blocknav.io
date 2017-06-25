@@ -14,35 +14,37 @@
             </h5>
         </div>
         <div class="panel-body">
-            <div class="list-group">
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{ tx.hash }}</h4>
-                    <p class="list-group-item-text">Transaction Hash</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{ tx.block_height }}</h4>
-                    <p class="list-group-item-text">Tx Block Height</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{ tx.size }}</h4>
-                    <p class="list-group-item-text">Tx Size</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{ tx.tx_index }}</h4>
-                    <p class="list-group-item-text">Tx Index</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{ tx.relayed_by }}</h4>
-                    <p class="list-group-item-text">Relayed By</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{ tx.version}}</h4>
-                    <p class="list-group-item-text">Version</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading"><span class="label label-danger">{{ tx.double_spend }}</span></h4>
-                    <p class="list-group-item-text">Double Spend</p>
-                </a>
+            <div class="table-responsive">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ tx.hash }}</h4>
+                        <p class="list-group-item-text">Transaction Hash</p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ tx.block_height }}</h4>
+                        <p class="list-group-item-text">Tx Block Height</p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ tx.size }}</h4>
+                        <p class="list-group-item-text">Tx Size</p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ tx.tx_index }}</h4>
+                        <p class="list-group-item-text">Tx Index</p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ tx.relayed_by }}</h4>
+                        <p class="list-group-item-text">Relayed By</p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ tx.version}}</h4>
+                        <p class="list-group-item-text">Version</p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading"><span class="label label-danger">{{ tx.double_spend }}</span></h4>
+                        <p class="list-group-item-text">Double Spend</p>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="panel-body">
@@ -56,7 +58,8 @@
                             {% if tx.inputs[0].script_sig != None %}
                                 <div class="well well-lg">
                                     <h5><i class="fa fa-chain"></i> Coinbase Transaction</h5>
-                                    <p class="label label-success">{{ tx.inputs[0].script_sig|truncate(150) }}</p>
+                                    <p class="label label-success visible-lg visible-md">{{ tx.inputs[0].script_sig|truncate(120) }}...</p>
+                                    <p class="label label-info visible-xs visible-sm">{{ tx.inputs[0].script_sig|truncate(40) }}...</p>
                                     <p><small>Script Signature</small></p>
                                 </div>
                             {% else %}
