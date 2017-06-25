@@ -6,71 +6,74 @@
     <div class="page-header" style="margin-top: 10px;">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h5><i class="fa fa-th"></i> Block: {{ block.hash }}</h5>
+                <h5 class="visible-lg visible-md"><i class="fa fa-th"></i> Block: {{ block.hash }}</h5>
+                <h5 class="visible-sm visible-xs"><i class="fa fa-th"></i> Block: {{ block.hash|truncate(40) }}...</h5>
             </div>
             <div class="panel-body">
-                <div class="col-lg-7">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.hash }}</h5>
-                            <p class="list-group-item-heading">Block Hash</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.previous_block }}</h5>
-                            <p class="list-group-item-heading">Previous Block Hash</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.merkle_root }}</h5>
-                            <p class="list-group-item-heading">Merkle Root</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.height }}</h5>
-                            <p class="list-group-item-heading">Block Height</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.n_tx }}</h5>
-                            <p class="list-group-item-heading">Number of Transactions in Block</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.size }}</h5>
-                            <p class="list-group-item-heading">Block Size</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.nonce }}</h5>
-                            <p class="list-group-item-heading">Block Nonce</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.bits }}</h5>
-                            <p class="list-group-item-heading">Block Bits</p>
-                        </a>
+                <div class="table-responsive">
+                    <div class="col-lg-7">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.hash }}</h5>
+                                <p class="list-group-item-heading">Block Hash</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.previous_block }}</h5>
+                                <p class="list-group-item-heading">Previous Block Hash</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.merkle_root }}</h5>
+                                <p class="list-group-item-heading">Merkle Root</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.height }}</h5>
+                                <p class="list-group-item-heading">Block Height</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.n_tx }}</h5>
+                                <p class="list-group-item-heading">Number of Transactions in Block</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.size }}</h5>
+                                <p class="list-group-item-heading">Block Size</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.nonce }}</h5>
+                                <p class="list-group-item-heading">Block Nonce</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.bits }}</h5>
+                                <p class="list-group-item-heading">Block Bits</p>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.version }}</h5>
-                            <p class="list-group-item-heading">Block Version</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.block_index }}</h5>
-                            <p class="list-group-item-heading">Block Index</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.time|datetime }}</h5>
-                            <p class="list-group-item-heading">Block Time</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.received_time}}</h5>
-                            <p class="list-group-item-heading">Block Received Time</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text">{{ block.relayed_by }}</h5>
-                            <p class="list-group-item-heading">Relayed By</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <h5 class="list-group-item-text"><span class="label label-danger">MAIN</span></h5>
-                            <p class="list-group-item-heading">Block Chain</p>
-                        </a>
+                    <div class="col-lg-5">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.version }}</h5>
+                                <p class="list-group-item-heading">Block Version</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.block_index }}</h5>
+                                <p class="list-group-item-heading">Block Index</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.time|datetime }}</h5>
+                                <p class="list-group-item-heading">Block Time</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.received_time}}</h5>
+                                <p class="list-group-item-heading">Block Received Time</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text">{{ block.relayed_by }}</h5>
+                                <p class="list-group-item-heading">Relayed By</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-text"><span class="label label-danger">MAIN</span></h5>
+                                <p class="list-group-item-heading">Block Chain</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

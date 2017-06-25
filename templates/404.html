@@ -1,0 +1,40 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+            <h1><i class="fa fa-frown-o red"></i> Oh, Snap!</h1>
+            <p class="lead">We couldn't find what you're looking for on <em><span id="display-domain">http://blocknav.io</span></em>.</p>
+            <p><a onclick=javascript:checkSite(); class="btn btn-primary btn-lg"><span
+                    class="green">Take Me To The Homepage</span></a>
+                <script type="text/javascript">
+                    function checkSite() {
+                        var currentSite = window.location.hostname;
+                        window.location = "http://" + currentSite;
+                    }
+                </script>
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="body-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>So, like... what just happened?</h2>
+                    <p>A <span class="label label-danger">404 error</span> status implies that the requested URL path, resource, file or page could not be found on this server.</p>
+                </div>
+                <div class="col-md-6">
+                    <h2>What can I do?</h2>
+                    <p><i class="fa fa-user"></i> <strong>If you're a site visitor...</strong></p>
+                    <p>Please use your browser's back button and check that you're in the right place. If you need immediate
+                        assistance, please send us an email instead.</p>
+                    <p><i class="fa fa-gear"></i><strong> If you're the site owner...</strong></p>
+                    <p>Please check that you're in the right place and get in touch with your website provider if you
+                        believe this to be an error.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
