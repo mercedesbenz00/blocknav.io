@@ -8,9 +8,13 @@ from blockchain import blockexplorer as be
 from blockchain import statistics
 from blockchain.exceptions import APIException
 from flask_qrcode import QRcode
+from bs4 import BeautifulSoup
 from datetime import datetime
 from forms import SearchForm, AddressSearchForm, RegistrationForm
 import config
+import requests
+import collections
+
 
 bootstrap = Bootstrap()
 app = Flask(__name__, static_url_path='')
@@ -20,6 +24,9 @@ Misaka(app)
 
 app.secret_key = config.SECRET_KEY
 app.api_code = config.API_KEY
+
+MiningPool = collections.namedtuple('MiningPool', 'rank, name, p_total, h_rate, n_blocks, e_blocks, eb_percent, '
+                                                  'b_size, avg_tx_fees, tx_fees_reward')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -164,9 +171,24 @@ def tx(hash):
 
 @app.route('/pools', methods=['GET', 'POST'])
 def pools():
+    pools = list()
+    url = config.STATS_URL
+    hdr = {'user-agent': 'Mozilla/5.0 (Linux i686)'}
+    r = requests.get(url, headers=hdr)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    table = soup.find('table', {'class': 'pool-panel-share-table'})
+    rows = table.find_all('tr')
+
+    for idx, row in enumerate(rows):
+        if idx != 0:
+            columns = row.find_all('td')
+            cols = [element.text.strip() for element in columns]
+            pools.append([element for element in cols if element])
+
     return render_template(
         'pools.html',
-        current_time=datetime.now().strftime('LLL')
+        current_time=datetime.now().strftime('LLL'),
+        pools=pools,
     )
 
 

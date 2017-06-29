@@ -17,62 +17,39 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5><i class="fa fa-chain"></i> Mining Pool List</h5>
+                <h5><i class="fa fa-chain"></i> Global Pool Distribution (Calculated by Blocks)</h5>
             </div>
             <div class="panel-body">
                 <table class="table table-striped table-responsive">
                     <thead>
                         <tr>
+                            <th>Current Rank</th>
                             <th>Pool Name</th>
-                            <th>Location</th>
-                            <th>Blocks Mined</th>
+                            <th>Network %</th>
                             <th>Hash Rate</th>
-                            <th>Rate Share</th>
+                            <th>Blocks Mined</th>
+                            <th>Empty Blocks</th>
+                            <th>% Empty Blocks</th>
+                            <th>Block Size</th>
+                            <th>Avg Fees/Block</th>
+                            <th>TX Fees % Block Reward</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="info">
-                            <td>Entire BTC Network</td>
-                            <td>Multi-Location</td>
-                            <td>54,922</td>
-                            <td>5.15 EH/s</td>
-                            <td><span class="label label-warning">100 %</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="{{ url_for('pool', pool='AntPool') }}">AntPool</a></td>
-                            <td>China</td>
-                            <td>9398</td>
-                            <td>729.42 PH/s</td>
-                            <td><span class="label label-success">17.11 %</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="{{ url_for('pool', pool='F2Pool') }}">F2Pool</a></td>
-                            <td>China/US</td>
-                            <td>8054</td>
-                            <td>659.95 PH/s</td>
-                            <td><span class="label label-success">14.66 %</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="{{ url_for('pool', pool='BTCC') }}">BTCC</a></td>
-                            <td>China/US</td>
-                            <td>5365</td>
-                            <td>451.55 PH/s</td>
-                            <td><span class="label label-success">9.77 %</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="{{ url_for('pool', pool='BW.COM') }}">BW.COM</a></td>
-                            <td>China</td>
-                            <td>4835</td>
-                            <td>439.97 PH/s</td>
-                            <td><span class="label label-success">8.80 %</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="{{ url_for('pool', pool='SlushPool') }}">SlushPool</a></td>
-                            <td>Global</td>
-                            <td>3172</td>
-                            <td>196.83 PH/s</td>
-                            <td><span class="label label-success">5.78 %</span></td>
-                        </tr>
+                        {% for pool in pools %}
+                            <tr {% if loop.index == 1 %}class="info"{% endif %}>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ pool[1] }}</td>
+                                <td>{{ pool[2] }}</td>
+                                <td>{{ pool[3] }}</td>
+                                <td>{{ pool[4] }}</td>
+                                <td>{{ pool[5] }}</td>
+                                <td>{{ pool[6] }}</td>
+                                <td>{{ pool[7] }}</td>
+                                <td>{{ pool[8] }}</td>
+                                <td><span class="label label-warning">{{ pool[9] }}</span></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

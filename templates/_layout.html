@@ -32,27 +32,27 @@
                     </div>
                     <div class="navbar-collapse collapse" id="navbar-main">
                         <ul class="nav navbar-nav">
-                            <li>
+                            <li {% if 'block' in request.path or 'blocks' in request.path %}class="active"{% endif %}>
                                 <a href="{{ url_for('blocks') }}">
                                     <i class="fa fa-th-large"></i> Blocks
                                 </a>
                             </li>
-                            <li>
+                            <li {% if 'address' in request.path %}class="active"{% endif %}>
                                 <a href="{{ url_for('address') }}">
                                     <i class="fa fa-map-marker"></i> Address
                                 </a>
                             </li>
-                            <li>
+                            <li {% if 'pool' in request.path or 'pools' in request.path %}class="active"{% endif %}>
                                 <a href="{{ url_for('pools') }}">
                                     <i class="fa fa-chain"></i> Pools
                                 </a>
                             </li>
-                            <li>
+                            <li {% if 'api' in request.path %}class="active"{% endif %}>
                                 <a href="{{ url_for('api_docs') }}">
                                     <i class="fa fa-gear"></i> API
                                 </a>
                             </li>
-                            <li>
+                            <li {% if 'login' in request.path %}class="active"{% endif %}>
                                 <a href="{{ url_for('login') }}">
                                     <i class="fa fa-sign-in"></i> Login
                                 </a>
