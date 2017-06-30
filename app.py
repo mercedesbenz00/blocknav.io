@@ -34,12 +34,14 @@ def index():
     blocks = None
     try:
         blocks = be.get_blocks(api_code=app.api_code)[:5]
+        block_count = len(blocks)
     except APIException as e:
         print('Sorry, an API error has occurred ' + str(e))
 
     return render_template(
         'index.html',
         blocks=blocks,
+        block_count=block_count,
         stats=get_stats(),
         current_time=datetime.now().strftime('LLL')
     )
