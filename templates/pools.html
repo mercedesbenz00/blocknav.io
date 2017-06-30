@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
                         {% for pool in pools %}
-                            <tr {% if loop.index == 1 %}class="danger"{% endif %}>
+                            <tr {% if loop.index == 1 %}class="success"{% endif %}>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ pool[1] }}</td>
                                 <td>{{ pool[2] }}</td>
@@ -55,6 +55,11 @@
                             </tr>
                         {% endfor %}
                     </tbody>
+                    <tfoot>
+                        <span class="pull-right">
+                            <small><i class="fa fa-calendar-o"></i> Mining Pool Statistics from <a href="https://btc.com/stats/pool" target="_blank">BTC.com</a>.  Last refreshed: {{ moment().format(current_time, refresh=True) }}</small>
+                        </span>
+                    </tfoot>
                 </table>
             </div>
         </div>
