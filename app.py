@@ -31,29 +31,36 @@ MiningPool = collections.namedtuple('MiningPool', 'rank, name, p_total, h_rate, 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    blocks = None
+    blocks = []
+    block_count = 0
+    stats = {}
+
     try:
         blocks = be.get_blocks(api_code=app.api_code)[:5]
         block_count = len(blocks)
+        stats = get_stats()
     except APIException as e:
-        print('Sorry, an API error has occurred ' + str(e))
+        flash('Sorry, we had a problem contacting the blockchain.info API.  Please try again later.')
 
     return render_template(
         'index.html',
         blocks=blocks,
         block_count=block_count,
-        stats=get_stats(),
+        stats=stats,
         current_time=datetime.now().strftime('LLL')
     )
 
 
 @app.route('/blocks', methods=['GET', 'POST'])
 def blocks():
+    blocks = []
+    block_count = 0
+
     try:
         blocks = be.get_blocks(api_code=app.api_code)
         block_count = len(blocks)
     except APIException as e:
-        print('Sorry, an API error has occurred ' + str(e))
+        flash('Sorry, we had a problem contacting the blockchain.info API.  Please try again later.')
 
     return render_template(
         'blocks.html',

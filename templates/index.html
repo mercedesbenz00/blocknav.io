@@ -3,6 +3,7 @@
 
 
 {% block content %}
+    {% if blocks %}
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -34,8 +35,9 @@
             </tfoot>
         </table>
     </div>
+    {% endif %}
 
-
+    {% if stats %}
     <div class="page-header">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -151,6 +153,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
